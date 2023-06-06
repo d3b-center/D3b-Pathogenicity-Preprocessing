@@ -78,5 +78,5 @@ hints:
   value: 2
 
 "sbg:links":
-- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.0.0'
+- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v0.1.0'
   label: github-release
