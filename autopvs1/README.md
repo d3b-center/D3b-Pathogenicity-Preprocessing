@@ -35,7 +35,7 @@ It contains two functions. `score5` is adapted from [MaxEntScan::score5ss](http:
 ### 4. pyhgvs (original author recommendation)
 [pyhgvs](https://github.com/counsyl/hgvs) provides a simple Python API for parsing, formatting, and normalizing HGVS names.
 But it only supports python2, I modified it to support python3 and added some other features. 
-It is also included in the **autopvs1**.
+`pyhgvs` is also included in the **autopvs1** Dockerfile.
 
 ### 5. Configuration
 
