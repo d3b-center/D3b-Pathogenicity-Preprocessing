@@ -25,8 +25,7 @@ Samtools provides a function “faidx” (FAsta InDeX), which creates a small fl
 allowing for fast random access to any subsequence in the indexed FASTA file, 
 while loading a minimal amount of the file in to memory. 
 
-[pyfaidx](https://pypi.org/project/pyfaidx/) module implements pure Python classes for indexing, retrieval, 
-and in-place modification of FASTA files using a samtools compatible index.
+[pyfaidx](https://pypi.org/project/pyfaidx/) module implements pure Python classes for indexing, retrieval, and in-place modification of FASTA files using a samtools compatible index.
 
 ### 3. maxentpy (original author recommendation)
 [maxentpy](https://github.com/kepbod/maxentpy) is a python wrapper for MaxEntScan to calculate splice site strength.
