@@ -1,11 +1,7 @@
 # Pathogenicity Preprocessing Workflow
 
-<p align="center">
-  <img src="https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/raw/main/doc/logo/d3b-cube.svg">
-</p>
-
 ## Prequisite
-It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/master/docs/GERMLINE_SNV_ANNOT_README.md) first.
+It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/v0.4.4/docs/GERMLINE_SNV_ANNOT_README.md) first.
 
 ## Pathogenicity Preprocessing Workflow
 This workflow uses the prerequisite input to run the InverVar workflow and autoPVS1 tool.

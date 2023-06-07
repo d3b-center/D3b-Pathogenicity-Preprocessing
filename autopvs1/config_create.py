@@ -15,7 +15,7 @@ data_dir = args.data_dir
 cwd = os.getcwd()
 """
 Can be made more flexible in the future.
-Config file format will basically be this, with cwd and data dir paths bein g used with fixed file names:
+Config file format will basically be this, with cwd and data dir paths being used with fixed file names:
 
 [DEFAULT]
 pvs1levels = /home/ubuntu/tools/pathogenicity-assessment/autopvs1/data/PVS1.level
