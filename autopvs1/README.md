@@ -60,7 +60,7 @@ pathogenic_site = data/clinvar_pathogenic_GRCh38.vcf
 All refs obtained from original git repo from `data` dir except for hg38 fasta.
 User should provide that as part of input
 
-**Note:** the chromesome name in fasta files should have `chr` prefix
+**Note:** the chromosome name in fasta files should have `chr` prefix
 
 ## USAGE
 
