@@ -5,7 +5,7 @@ label: Pathogenicity Preprocessing Workflow
 doc: |
   Runs InterVar and autoPVS1 on a VEP-annotated VCF
 requirements:
-- class: SubworkflowFeatureRequirement
+  - class: SubworkflowFeatureRequirement
 
 inputs:
   # Common
@@ -67,7 +67,7 @@ steps:
         autopvs1_db: autopvs1_db
         autopvs1_db_str: autopvs1_db_str
         vep_vcf: vep_vcf
-        genome_version:  buildver
+        genome_version: buildver
         output_basename: output_basename
     out: [autopvs1_tsv]
 

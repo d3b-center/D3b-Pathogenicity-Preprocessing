@@ -4,7 +4,9 @@ id: intervar-classification-wf
 label: InterVar Classification Workflow
 doc: |
   Takes in a VCF file, and converts to ANNOVAR table format, annotates with supporting data needed for classification using ANNOVAR, then classifies variants
-
+requirements:
+  - class: StepInputExpressionRequirement
+  - class: MultipleInputFeatureRequirement
 inputs:
   input_vcf: { type: File, secondaryFiles: [.tbi], doc: "VCF file (with associated index) to be annotated" }
   annovar_db: { type: File, doc: "Annovar Database with at minimum required resources to InterVar" }
@@ -87,6 +89,3 @@ $namespaces:
 hints:
 - class: sbg:maxNumberOfParallelInstances
   value: 2
-
-
-

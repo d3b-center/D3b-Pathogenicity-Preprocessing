@@ -11,13 +11,11 @@ requirements:
   - class: DockerRequirement
     dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/vcfutils:latest'
 
-baseCommand: ["/bin/bash", "-c"]
+baseCommand: []
 arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      set -eo pipefail
-
       (bcftools annotate -x $(inputs.strip_info) $(inputs.input_vcf.path) -O z 
       -o $(inputs.output_basename).$(inputs.tool_name).INFO_stripped.vcf.gz &&
       tabix $(inputs.output_basename).$(inputs.tool_name).INFO_stripped.vcf.gz) ||

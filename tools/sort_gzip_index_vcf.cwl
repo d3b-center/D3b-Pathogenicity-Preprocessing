@@ -10,23 +10,22 @@ requirements:
     coresMin: 8
   - class: DockerRequirement
     dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/vcfutils:latest'
+  - class: InitialWorkDirRequirement
+    listing:
+      - entryname: sort_bgzip_index_vcf.sh
+        entry:
+          $include: ../scripts/sort_bgzip_index_vcf.sh
 
-baseCommand: ["/bin/bash", "-c"]
+baseCommand: ["/bin/bash"]
 arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      set -eo pipefail
-
-      bcftools sort
+      sort_bgzip_index_vcf.sh
   - position: 1
     shellQuote: false
     valueFrom: >-
-      | bgzip -@ 8
-  - position: 2
-    shellQuote: false
-    valueFrom: >-
-      > $(inputs.input_vcf.basename).vcf.gz && tabix $(inputs.input_vcf.basename).vcf.gz 
+      $(inputs.input_vcf.basename).vcf.gz
 
 inputs:
   input_vcf: {type: File, doc: "vcf to sort", inputBinding: { position: 0 } }
