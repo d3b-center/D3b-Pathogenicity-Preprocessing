@@ -4,7 +4,7 @@
 It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/v0.4.4/docs/GERMLINE_SNV_ANNOT_README.md) first.
 
 ## Pathogenicity Preprocessing Workflow
-This workflow uses the prerequisite input to run the InverVar workflow and autoPVS1 tool.
+This workflow uses the prerequisite input to run the InterVar workflow and autoPVS1 tool.
 Recommended inputs:
  - `annovar_db`: Annovar Database with at minimum required resources to InterVar. Need to use [annovar download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
      ```

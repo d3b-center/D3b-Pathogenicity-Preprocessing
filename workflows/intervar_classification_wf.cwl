@@ -31,7 +31,7 @@ inputs:
 outputs:
   intervar_classification: { type: File, outputSource: intervar_classify/intervar_scored }
   annovar_vcfoutput: { type: 'File?', outputSource: sort_gzip_index_vcf/gzipped_vcf }
-  annovar_txt: { type: File, outputSource: run_annovar/annovar_txt }
+  annovar_txt: { type: File, outputSource: compress_annovar_output/gzipped_txt }
 
 steps:
   bcftools_strip_info:
@@ -83,6 +83,12 @@ steps:
     in:
       input_vcf: run_annovar/vcf_output
     out: [gzipped_vcf]
+  
+  compress_annovar_output:
+    run: ../tools/compress_annovar_output.cwl
+    in:
+      annovar_txt: run_annovar/annovar_txt
+    out: [gzipped_txt]
 
 $namespaces:
   sbg: https://sevenbridges.com

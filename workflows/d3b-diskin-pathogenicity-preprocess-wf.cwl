@@ -26,7 +26,7 @@ inputs:
   annovar_ram: { type: 'int?', doc: "Memory to run tool. Sometimes need more", default: 32}
   annovar_vcfinput: { type: 'boolean?', doc: "Annotate vcf and generate output file as vcf", default: false }
   bcftools_strip_info: {type: 'string?', doc: "csv string of columns to strip if\
-      \ needed to avoid conflict/improve performance of a tool, i.e INFO/CSQ"}
+      \ needed to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
   intervar_db: { type: File, doc: "InterVar Database from git repo + mim_genes.txt" }
   intervar_db_str: { type: 'string?', doc: "Name of dir created when intervar db is un-tarred", default: "intervardb" }
   intervar_ram: { type: 'int?', doc: "Min ram needed for task in GB", default: 32 }
@@ -78,5 +78,5 @@ hints:
   value: 2
 
 "sbg:links":
-- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v0.1.0'
+- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.0.0'
   label: github-release
