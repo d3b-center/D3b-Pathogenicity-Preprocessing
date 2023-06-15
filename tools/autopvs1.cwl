@@ -40,4 +40,4 @@ inputs:
     default: "hg38", inputBinding: { position: 2, prefix: "--genome_version" } }
   output_basename: { type: string, doc: "String that will be used in the output filenames" }
 outputs:
-  autopvs1_tsv.gz: { type: File, outputBinding: { glob: '*.autopvs1.tsv.gz'} }
+  autopvs1_tsv: { type: File, outputBinding: { glob: '*.autopvs1.tsv.gz'} }
