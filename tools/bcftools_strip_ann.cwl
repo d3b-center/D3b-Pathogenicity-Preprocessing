@@ -1,4 +1,4 @@
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: CommandLineTool
 id: bcftools_strip_info
 doc: "Quick tool to strip info from vcf file before re-annotation"
