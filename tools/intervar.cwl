@@ -34,7 +34,7 @@ arguments:
     shellQuote: false
     valueFrom: |
       1>&2
-    - position: 99
+  - position: 99
     shellQuote: false
     valueFrom: |
       && pigz -p 8 $(inputs.input_ann.basename).intervar
