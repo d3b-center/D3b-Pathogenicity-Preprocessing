@@ -22,7 +22,7 @@ inputs:
   annovar_otherinfo: { type: 'boolean?', doc: "print out otherinfo (information after fifth column in queryfile)", default: true }
   annovar_threads: { type: 'int?', doc: "Num threads to use to process filter inputs", default: 8 }
   annovar_ram: { type: 'int?', doc: "Memory to run tool. Sometimes need more", default: 32}
-  annovar_vcfinput: { type: 'boolean?', doc: "Annotate vcf and generate output file as vcf", default: false }
+  annovar_vcfinput: { type: 'boolean?', doc: "Annotate vcf and generate output file as vcf", default: true }
   bcftools_strip_info: {type: 'string?', doc: "csv string of columns to strip if\
       \ needed to avoid conflict/improve performance of a tool, i.e INFO/CSQ"}
   intervar_db: { type: File, doc: "InterVar Database from git repo + mim_genes.txt" }

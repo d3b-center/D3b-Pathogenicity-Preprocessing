@@ -30,11 +30,14 @@ arguments:
     valueFrom: >-
       && cp /annovar/*.pl ./
       && python3 /Intervar.py
-  - position: 99
+  - position: 98
     shellQuote: false
     valueFrom: |
       1>&2
-
+    - position: 99
+    shellQuote: false
+    valueFrom: |
+      && pigz -p 8 $(inputs.input_ann.basename).intervar
 
 inputs:
   input_ann: { type: File, secondaryFiles: ['.tbi?'], doc: "VCF file (with associated index) or ANNOVAR-formatted file to be classified", inputBinding: { position: 2, prefix: "-i"} }
@@ -52,4 +55,4 @@ inputs:
   intervar_ram: { type: 'int?', doc: "Min ram needed for task in GB", default: 16}
 
 outputs:
-   intervar_scored: { type: File, outputBinding: {glob: "*_multianno.txt.intervar"}}
+   intervar_scored: { type: File, outputBinding: {glob: "*_multianno.txt.intervar.gz"}}
