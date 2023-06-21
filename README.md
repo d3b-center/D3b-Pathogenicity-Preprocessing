@@ -4,11 +4,15 @@
 It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/v0.4.4/docs/GERMLINE_SNV_ANNOT_README.md) first.
 
 ## Pathogenicity Preprocessing Workflow
-This workflow uses the prerequisite input to run the InverVar workflow and autoPVS1 tool.
-Recommended inputs:
- - `annovar_db`: Annovar Database with at minimum required resources to InterVar. Need to use [annovar download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
+This workflow uses the prerequisite input to run the InterVar workflow and autoPVS1 tool.
+The major pieces of software being used are:
+ - ANNOVAR latest: The software has no versioning, but references do. See `annovar_db` section in [Recommended inputs](#recommended-inputs)
+ - InterVar v2.2.1
+ - AutoPVS1 v1.0.1: Modified from AutoPVS1 v2.0 to fit annotated KF vcf output. See [README for autoPVS1](https://github.com/d3b-center/D3b-autoPVS1/tree/v1.0.0#readme) for details
+### Recommended inputs:
+ - `annovar_db`: ANNOVAR Database with at minimum required resources to InterVar. Need to use [ANNOVAR download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
      ```
-            annovar_humandb_hg38_intervar/
+        annovar_humandb_hg38_intervar/
         ├── hg38_AFR.sites.2015_08.txt
         ├── hg38_AFR.sites.2015_08.txt.idx
         ├── hg38_ALL.sites.2015_08.txt
@@ -49,7 +53,7 @@ Recommended inputs:
  - `intervar_db`: InterVar Database from git repo + mim_genes.txt
  - `autopvs1_db`: git repo files plus a user-provided fasta reference. For hg38, recommend:
     ```
-    data
+    data/
         ├── Homo_sapiens_assembly38.fasta
         ├── Homo_sapiens_assembly38.fasta.fai
         ├── PVS1.level
@@ -65,10 +69,15 @@ Recommended inputs:
  - `annovar_db_str`: Name of dir created when `annovar_db` tar ball in decompressed. Default: `annovar_humandb_hg38_intervar`
  - `autopvs1_db_str`: Name of dir created when `autopvs1_db` tar ball in decompressed. Default: `data`
  - `intervar_db_str`: Name of dir created when `intervar_db_str` tar ball in decompressed. Default: `intervardb`
-
+#### **Note:** We used a gene symbol liftover tool to allow gene symbols searches from different gene models to be found, `PVS1.level` was augmented with additional entries in which a gene symbols from the original file has changed.
+The [update_gene_symbols.py](https://github.com/d3b-center/D3b-DGD-Collaboration/blob/v0.2.0/scripts/update_gene_symbols.py) tool was used to achieve this, with liftover source obtained from [here](https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/archive/monthly/tsv/hgnc_complete_set_2021-06-01.txt) to match gene symbols from default/recommended VEP annotation. Example command:
+```sh
+python3 /Users/brownm28/Documents/git_repos/D3b-DGD-Collaboration/scripts/update_gene_symbols.py -g hgnc_complete_set_2021-06-01.txt -f PVS1.level -z GENE level -u GENE -o results --explode_records 2> old_new.log
+```
+With `results` used to replace `PVS1.level` file. Recommend references for this workflow can be obtained [here](https://cavatica.sbgenomics.com/u/kfdrc-harmonization/kf-references/files/#q?path=d3b_diskin_pathogenicity).
 ### InterVar Classification Workflow
 This workflow is a critical component in generating scoring metrics needed to classify pathogenicity of variants.
 Documentation for this can be found [here](docs/INTERVAR_WF.md)
 ### AutoPVS1
 An additional pathogenicity scoring tool, run on the VEP-annotated input.
-Documentation for this can be found [here](autopvs1/README.md)
+Documentation for this can be found [here](https://github.com/d3b-center/D3b-autoPVS1/tree/v1.0.0#readme)

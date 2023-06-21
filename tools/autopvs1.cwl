@@ -11,7 +11,7 @@ requirements:
     ramMin: 16000
     coresMin: 8
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/brownm28/autopvs1:v0.2.0a'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/autopvs1:v1.0.1'
 
 baseCommand: []
 arguments:
@@ -30,7 +30,7 @@ arguments:
   - position: 3
     shellQuote: false
     valueFrom: >-
-      > $(inputs.output_basename).autopvs1.tsv
+      | pigz -p 8 > $(inputs.output_basename).autopvs1.tsv.gz
 
 inputs:
   autopvs1_db: { type: File, doc: "Annovar Database with at minimum required resources to InterVar", inputBinding: { position: 0 }}
@@ -40,4 +40,4 @@ inputs:
     default: "hg38", inputBinding: { position: 2, prefix: "--genome_version" } }
   output_basename: { type: string, doc: "String that will be used in the output filenames" }
 outputs:
-  autopvs1_tsv: { type: File, outputBinding: { glob: '*.autopvs1.tsv'} }
+  autopvs1_tsv: { type: File, outputBinding: { glob: '*.autopvs1.tsv.gz'} }

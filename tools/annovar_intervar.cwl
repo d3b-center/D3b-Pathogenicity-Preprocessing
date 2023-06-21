@@ -11,7 +11,7 @@ requirements:
     ramMin: ${ return inputs.ram *1000 }
     coresMin: $(inputs.threads)
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/brownm28/intervar:2.2.1'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/intervar:v2.2.1'
 
 baseCommand: []
 arguments:

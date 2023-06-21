@@ -22,7 +22,7 @@ inputs:
   annovar_otherinfo: { type: 'boolean?', doc: "print out otherinfo (information after fifth column in queryfile)", default: true }
   annovar_threads: { type: 'int?', doc: "Num threads to use to process filter inputs", default: 8 }
   annovar_ram: { type: 'int?', doc: "Memory to run tool. Sometimes need more", default: 32}
-  annovar_vcfinput: { type: 'boolean?', doc: "Annotate vcf and generate output file as vcf", default: false }
+  annovar_vcfinput: { type: 'boolean?', doc: "Annotate vcf and generate output file as vcf", default: true }
   bcftools_strip_info: {type: 'string?', doc: "csv string of columns to strip if\
       \ needed to avoid conflict/improve performance of a tool, i.e INFO/CSQ"}
   intervar_db: { type: File, doc: "InterVar Database from git repo + mim_genes.txt" }
@@ -31,7 +31,7 @@ inputs:
 outputs:
   intervar_classification: { type: File, outputSource: intervar_classify/intervar_scored }
   annovar_vcfoutput: { type: 'File?', outputSource: sort_gzip_index_vcf/gzipped_vcf }
-  annovar_txt: { type: File, outputSource: run_annovar/annovar_txt }
+  annovar_txt: { type: File, outputSource: compress_annovar_output/gzipped_txt }
 
 steps:
   bcftools_strip_info:
@@ -83,6 +83,12 @@ steps:
     in:
       input_vcf: run_annovar/vcf_output
     out: [gzipped_vcf]
+  
+  compress_annovar_output:
+    run: ../tools/compress_annovar_output.cwl
+    in:
+      annovar_txt: run_annovar/annovar_txt
+    out: [gzipped_txt]
 
 $namespaces:
   sbg: https://sevenbridges.com

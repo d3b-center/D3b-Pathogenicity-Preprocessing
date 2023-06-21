@@ -25,7 +25,7 @@ arguments:
   - position: 1
     shellQuote: false
     valueFrom: >-
-      $(inputs.input_vcf.basename).vcf.gz
+      $(inputs.input_vcf.basename).gz
 
 inputs:
   input_vcf: {type: File, doc: "vcf to sort", inputBinding: { position: 0 } }
