@@ -9,7 +9,7 @@ requirements:
     ramMin: 16000
     coresMin: 8
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/autopvs1:v0.2.0a'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/autopvs1:v1.0.0'
 
 baseCommand: [pigz, -c, -p 8]
 arguments:
