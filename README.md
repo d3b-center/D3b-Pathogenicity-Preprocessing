@@ -5,10 +5,14 @@ It is recommended to have first run the [Kids First Germline Annotation Workflow
 
 ## Pathogenicity Preprocessing Workflow
 This workflow uses the prerequisite input to run the InterVar workflow and autoPVS1 tool.
-Recommended inputs:
- - `annovar_db`: Annovar Database with at minimum required resources to InterVar. Need to use [annovar download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
+The major pieces of software being used are:
+ - ANNOVAR latest: The software has no versioning, but references do. See `annovar_db` section in [Recommended inputs](#recommended-inputs)
+ - InterVar v2.2.1
+ - AutoPVS1 v2.0a: Modified from the original to fit annotated KF vcf output. See [README for autoPVS1](autopvs1/README.md) for details
+### Recommended inputs:
+ - `annovar_db`: ANNOVAR Database with at minimum required resources to InterVar. Need to use [ANNOVAR download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
      ```
-            annovar_humandb_hg38_intervar/
+        annovar_humandb_hg38_intervar/
         ├── hg38_AFR.sites.2015_08.txt
         ├── hg38_AFR.sites.2015_08.txt.idx
         ├── hg38_ALL.sites.2015_08.txt
@@ -49,7 +53,7 @@ Recommended inputs:
  - `intervar_db`: InterVar Database from git repo + mim_genes.txt
  - `autopvs1_db`: git repo files plus a user-provided fasta reference. For hg38, recommend:
     ```
-    data
+    data/
         ├── Homo_sapiens_assembly38.fasta
         ├── Homo_sapiens_assembly38.fasta.fai
         ├── PVS1.level
