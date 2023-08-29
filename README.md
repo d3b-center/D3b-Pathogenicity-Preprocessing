@@ -80,4 +80,4 @@ This workflow is a critical component in generating scoring metrics needed to cl
 Documentation for this can be found [here](docs/INTERVAR_WF.md)
 ### AutoPVS1
 An additional pathogenicity scoring tool, run on the VEP-annotated input.
-Documentation for this can be found [here](https://github.com/d3b-center/D3b-autoPVS1/tree/v1.0.0#readme)
+Documentation for this can be found [here](https://github.com/d3b-center/D3b-autoPVS1/tree/v2.0.0#readme)
