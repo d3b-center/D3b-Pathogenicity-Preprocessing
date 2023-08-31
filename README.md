@@ -1,14 +1,14 @@
 # Pathogenicity Preprocessing Workflow
 
 ## Prequisite
-It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/v0.4.4/docs/GERMLINE_SNV_ANNOT_README.md) first.
+It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/v1.0.0/docs/GERMLINE_SNV_ANNOT_README.md) first.
 
 ## Pathogenicity Preprocessing Workflow
 This workflow uses the prerequisite input to run the InterVar workflow and autoPVS1 tool.
 The major pieces of software being used are:
  - ANNOVAR latest: The software has no versioning, but references do. See `annovar_db` section in [Recommended inputs](#recommended-inputs)
  - InterVar v2.2.1
- - AutoPVS1 v1.0.1: Modified from AutoPVS1 v2.0 to fit annotated KF vcf output. See [README for autoPVS1](https://github.com/d3b-center/D3b-autoPVS1/tree/v1.0.0#readme) for details
+ - AutoPVS1 v2.0.0: Modified from AutoPVS1 v2.0 to fit annotated KF vcf output. See [README for autoPVS1](https://github.com/d3b-center/D3b-autoPVS1/tree/v2.0.0#readme) for details
 ### Recommended inputs:
  - `annovar_db`: ANNOVAR Database with at minimum required resources to InterVar. Need to use [ANNOVAR download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
      ```
@@ -80,4 +80,4 @@ This workflow is a critical component in generating scoring metrics needed to cl
 Documentation for this can be found [here](docs/INTERVAR_WF.md)
 ### AutoPVS1
 An additional pathogenicity scoring tool, run on the VEP-annotated input.
-Documentation for this can be found [here](https://github.com/d3b-center/D3b-autoPVS1/tree/v1.0.0#readme)
+Documentation for this can be found [here](https://github.com/d3b-center/D3b-autoPVS1/tree/v2.0.0#readme)

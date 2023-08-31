@@ -11,7 +11,7 @@ requirements:
     ramMin: 16000
     coresMin: 8
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/autopvs1:v1.0.1'
+    dockerPull: 'pgc-images.sbgenomics.com/d3b-bixu/autopvs1:v2.0.0'
 
 baseCommand: []
 arguments:
@@ -35,7 +35,7 @@ arguments:
 inputs:
   autopvs1_db: { type: File, doc: "Annovar Database with at minimum required resources to InterVar", inputBinding: { position: 0 }}
   autopvs1_db_str: { type: 'string?', doc: "Name of dir created when annovar db is un-tarred", inputBinding: { position: 1, prefix: "--data_dir" }, default: "data"}
-  vep_vcf: { type: File, doc: "VEP annotated input file", inputBinding: { position: 2, prefix: "--vep_vcf"} }
+  vep_vcf: { type: File, doc: "VEP annotated input file", inputBinding: { position: 2, prefix: "--vep_vcf"}, secondaryFiles: ['.tbi']}
   genome_version:  { type: ['null', { type: enum, symbols: ["hg38","GRCh38"], name: "genome_version" } ], doc: "Genome reference build version",
     default: "hg38", inputBinding: { position: 2, prefix: "--genome_version" } }
   output_basename: { type: string, doc: "String that will be used in the output filenames" }

@@ -13,7 +13,7 @@ doc: |-
   The major pieces of software being used are:
    - ANNOVAR latest: The software has no versioning, but references do. See `annovar_db` section in [Recommended inputs](#recommended-inputs)
    - InterVar v2.2.1
-   - AutoPVS1 v1.0.1: Modified from the original to fit annotated KF vcf output. See [README for autoPVS1](https://github.com/d3b-center/D3b-autoPVS1/tree/v1.0.0#readme) for details
+   - AutoPVS1 v2.0.0: Modified from the original to fit annotated KF vcf output. See [README for autoPVS1](https://github.com/d3b-center/D3b-autoPVS1/tree/v2.0.0#readme) for details
   ### Recommended inputs:
    - `annovar_db`: ANNOVAR Database with at minimum required resources to InterVar. Need to use [ANNOVAR download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
        ```
@@ -166,7 +166,7 @@ hints:
 - class: sbg:maxNumberOfParallelInstances
   value: 2
 "sbg:links":
-- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.0.0'
+- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.0.1'
   label: github-release
 sbg:license: Apache License 2.0
 sbg:publisher: KFDRC
