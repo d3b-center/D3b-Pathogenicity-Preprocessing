@@ -97,7 +97,7 @@ inputs:
   output_basename: {type: string, doc: "String that will be used in the output filenames.\
       \ Be sure to be consistent with this as InterVar will use this too"}
   annovar_db: {type: File, doc: "Annovar Database with at minimum required resources\
-      \ to InterVar", sbg:suggestedValue: {class: File, path: 648b2bf575423d2473af6ed8,
+      \ to InterVar", "sbg:suggestedValue": {class: File, path: 648b2bf575423d2473af6ed8,
       name: annovar_humandb_hg38_intervar.tgz}}
   annovar_db_str: {type: 'string?', doc: "Name of dir created when annovar db is un-tarred",
     default: "annovar_humandb_hg38_intervar"}
@@ -117,12 +117,12 @@ inputs:
   bcftools_strip_info: {type: 'string?', doc: "csv string of columns to strip if needed\
       \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
   intervar_db: {type: File, doc: "InterVar Database from git repo + mim_genes.txt",
-    sbg:suggestedValue: {class: File, path: 648b2bf575423d2473af6ed6, name: intervardb_2021-08.tar.gz}}
+    "sbg:suggestedValue": {class: File, path: 648b2bf575423d2473af6ed6, name: intervardb_2021-08.tar.gz}}
   intervar_db_str: {type: 'string?', doc: "Name of dir created when intervar db is\
       \ un-tarred", default: "intervardb"}
   intervar_ram: {type: 'int?', doc: "Min ram needed for task in GB", default: 32}
   autopvs1_db: {type: File, doc: "git repo files plus a user-provided fasta reference",
-    sbg:suggestedValue: {class: File, path: 648b2bf575423d2473af6ed7, name: autoPVS1_references_sym_updated.tar.gz}}
+    "sbg:suggestedValue": {class: File, path: 648b2bf575423d2473af6ed7, name: autoPVS1_references_sym_updated.tar.gz}}
   autopvs1_db_str: {type: 'string?', doc: "Name of dir created when annovar db is\
       \ un-tarred", default: "data"}
 outputs:
