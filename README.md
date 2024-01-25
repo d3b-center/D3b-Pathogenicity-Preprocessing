@@ -1,4 +1,5 @@
 # Pathogenicity Preprocessing Workflow
+To run, please see the [CAVATICA app](https://cavatica.sbgenomics.com/public/apps/cavatica/apps-publisher/d3b-diskin-pathogenicity-preprocess-wf).
 
 ## Prequisite
 It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-germline-workflow/blob/v1.0.0/docs/GERMLINE_SNV_ANNOT_README.md) first.
