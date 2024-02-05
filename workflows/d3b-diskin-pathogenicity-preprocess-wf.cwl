@@ -116,6 +116,9 @@ inputs:
       \ as vcf", default: true}
   bcftools_strip_info: {type: 'string?', doc: "csv string of columns to strip if needed\
       \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
+  # bcftools annotate if more to do
+  bcftools_annot_columns: {type: 'string?', doc: "csv string of columns from annotation to port into the input vcf", default: "INFO/ALLELEID,INFO/CLNDN,INFO/CLNDNINCL,INFO/CLNDISDB,INFO/CLNDISDBINCL,INFO/CLNHGVS,INFO/CLNREVSTAT,INFO/CLNSIG,INFO/CLNSIGCONF,INFO/CLNSIGINCL,INFO/CLNVC,INFO/CLNVCSO,INFO/CLNVI"}
+  annotation_vcf: {type: 'File?', secondaryFiles: ['.tbi'], doc: "additional bgzipped annotation vcf file"}
   intervar_db: {type: File, doc: "InterVar Database from git repo + mim_genes.txt",
     "sbg:suggestedValue": {class: File, path: 648b2bf575423d2473af6ed6, name: intervardb_2021-08.tar.gz}}
   intervar_db_str: {type: 'string?', doc: "Name of dir created when intervar db is\
@@ -128,7 +131,7 @@ inputs:
 outputs:
   intervar_classification: {type: File, outputSource: run_intervar/intervar_classification}
   autopvs1_tsv: {type: File, outputSource: run_autopvs1/autopvs1_tsv}
-  annovar_vcfoutput: {type: 'File?', outputSource: run_intervar/annovar_vcfoutput}
+  annovar_vcfoutput: { type: 'File?', outputSource: [bcftools_annotate/bcftools_annotated_vcf, run_intervar/annovar_vcfoutput], pickValue: first_non_null }
   annovar_txt: {type: File, outputSource: run_intervar/annovar_txt}
 steps:
   run_intervar:
@@ -160,6 +163,18 @@ steps:
       genome_version: buildver
       output_basename: output_basename
     out: [autopvs1_tsv]
+  bcftools_annotate:
+    when: $(inputs.annotation_vcf != null)
+    run: ../kf-annotation-tools/tools/bcftools_annotate.cwl
+    in:
+      input_vcf: run_intervar/annovar_vcfoutput
+      annotation_vcf: annotation_vcf
+      columns: bcftools_annot_columns
+      output_basename: output_basename
+      tool_name:
+        valueFrom: "annovar"
+    out: [bcftools_annotated_vcf]
+
 $namespaces:
   sbg: https://sevenbridges.com
 hints:
