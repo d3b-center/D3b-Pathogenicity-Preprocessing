@@ -114,7 +114,9 @@ inputs:
   annovar_ram: {type: 'int?', doc: "Memory to run tool. Sometimes need more", default: 32}
   annovar_vcfinput: {type: 'boolean?', doc: "Annotate vcf and generate output file\
       \ as vcf", default: true}
-  bcftools_strip_info: {type: 'string?', doc: "csv string of columns to strip if needed\
+  bcftools_strip_for_intervar: {type: 'string?', doc: "csv string of columns to strip if needed\
+      \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
+  bcftools_strip_for_vep: {type: 'string?', doc: "csv string of columns to strip if needed\
       \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
   # bcftools annotate if more to do
   bcftools_annot_columns: {type: 'string?', doc: "csv string of columns from annotation to port into the input vcf", default: "INFO/ALLELEID,INFO/CLNDN,INFO/CLNDNINCL,INFO/CLNDISDB,INFO/CLNDISDBINCL,INFO/CLNHGVS,INFO/CLNREVSTAT,INFO/CLNSIG,INFO/CLNSIGCONF,INFO/CLNSIGINCL,INFO/CLNVC,INFO/CLNVCSO,INFO/CLNVI"}
@@ -133,7 +135,7 @@ outputs:
   autopvs1_tsv: {type: File, outputSource: run_autopvs1/autopvs1_tsv}
   annovar_vcfoutput: { type: 'File?', outputSource: run_intervar/annovar_vcfoutput }
   annovar_txt: {type: File, outputSource: run_intervar/annovar_txt}
-  vep_with_clinvar: { 'File?, outputSource: bcftools_annotate/bcftools_annotated_vcf }
+  vep_with_clinvar: { type: 'File?', outputSource: bcftools_annotate/bcftools_annotated_vcf }
 steps:
   run_intervar:
     run: intervar_classification_wf.cwl
@@ -150,7 +152,7 @@ steps:
       annovar_threads: annovar_threads
       annovar_ram: annovar_ram
       annovar_vcfinput: annovar_vcfinput
-      bcftools_strip_info: bcftools_strip_info
+      bcftools_strip_info: bcftools_strip_for_intervar
       intervar_db: intervar_db
       intervar_db_str: intervar_db_str
       intervar_ram: intervar_ram
@@ -164,11 +166,21 @@ steps:
       genome_version: buildver
       output_basename: output_basename
     out: [autopvs1_tsv]
+  bcftools_strip_vep:
+    when: $(inputs.strip_info != null)
+    run: ../kf-annotation-tools/tools/bcftools_strip_ann.cwl
+    in:
+      input_vcf: vep_vcf
+      output_basename: output_basename
+      strip_info: bcftools_strip_for_vep
+    out: [stripped_vcf]
   bcftools_annotate:
     when: $(inputs.annotation_vcf != null)
     run: ../kf-annotation-tools/tools/bcftools_annotate.cwl
     in:
-      input_vcf: vep_vcf
+      input_vcf:
+        source: [bcftools_strip_vep/stripped_vcf, vep_vcf]
+        pickValue: first_non_null
       annotation_vcf: annotation_vcf
       columns: bcftools_annot_columns
       output_basename: output_basename
