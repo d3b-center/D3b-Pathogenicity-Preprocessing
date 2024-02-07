@@ -173,6 +173,9 @@ steps:
       input_vcf: vep_vcf
       output_basename: output_basename
       strip_info: bcftools_strip_for_vep
+      tool_name:
+        valueFrom: "vep"
+
     out: [stripped_vcf]
   bcftools_annotate:
     when: $(inputs.annotation_vcf != null)

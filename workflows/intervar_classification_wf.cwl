@@ -41,6 +41,8 @@ steps:
       input_vcf: input_vcf
       output_basename: output_basename
       strip_info: bcftools_strip_info
+      tool_name:
+        valueFrom: "vep"
     out: [stripped_vcf]
  
   run_annovar:
