@@ -131,8 +131,9 @@ inputs:
 outputs:
   intervar_classification: {type: File, outputSource: run_intervar/intervar_classification}
   autopvs1_tsv: {type: File, outputSource: run_autopvs1/autopvs1_tsv}
-  annovar_vcfoutput: { type: 'File?', outputSource: [bcftools_annotate/bcftools_annotated_vcf, run_intervar/annovar_vcfoutput], pickValue: first_non_null }
+  annovar_vcfoutput: { type: 'File?', outputSource: run_intervar/annovar_vcfoutput }
   annovar_txt: {type: File, outputSource: run_intervar/annovar_txt}
+  vep_with_clinvar: { 'File?, outputSource: bcftools_annotate/bcftools_annotated_vcf }
 steps:
   run_intervar:
     run: intervar_classification_wf.cwl
@@ -167,12 +168,12 @@ steps:
     when: $(inputs.annotation_vcf != null)
     run: ../kf-annotation-tools/tools/bcftools_annotate.cwl
     in:
-      input_vcf: run_intervar/annovar_vcfoutput
+      input_vcf: vep_vcf
       annotation_vcf: annotation_vcf
       columns: bcftools_annot_columns
       output_basename: output_basename
       tool_name:
-        valueFrom: "annovar"
+        valueFrom: "vep.clinvar"
     out: [bcftools_annotated_vcf]
 
 $namespaces:
