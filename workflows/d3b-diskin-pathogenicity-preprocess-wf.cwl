@@ -100,6 +100,7 @@ doc: |-
    - `annotation_vcf`: hg38 chromosome-formatted vcf file with multi-allelics split. If provided bcftools will add annotation from the specified columns for each variant that matches
    - `bcftools_annot_columns`: A csv string of from annotation to port into the input vcf. Must provide if `annotation_vcf` given. See [bcftools annotate](https://samtools.github.io/bcftools/bcftools.html#annotate) documentation on how to properly reference
    - `bcftools_strip_for_vep`: If re-annotating certain `INFO` fields, it's best to strip the old annotation first to avoid conflicts. Use the same format as `bcftools_annot_columns` to reference fields being stripped
+   - `bcftools_strip_for_annovar`: More of a convenience to strip the ANNOVAR VCF of annotations that maybe have been used initially in the workflow, but will likely not be used downstream 
    #### A note on ClinVar annotation
    For the publication, [ClinVar release 20231028](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/archive_2.0/2023/clinvar_20231028.vcf.gz) was used. In order to be compatible with our hg38-aligned vcfs, we additionally downloaded the [variant suammry](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz) file, ran a [custom script](scripts/cleanup_clinvar.py) that:
     - Converted contigs to `chr` format
@@ -133,6 +134,8 @@ inputs:
       of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
   bcftools_strip_for_vep: {type: 'string?', doc: "csv string of columns to strip if needed to avoid conflict/improve performance of
       a tool, i.e INFO/CSQ"}
+  bcftools_strip_for_annovar: {type: 'string?', doc: "csv string of columns to strip if needed to avoid conflict/improve performance
+      of a tool, i.e INFO/CLNSIG"}
   # bcftools annotate if more to do
   bcftools_annot_columns: {type: 'string?', doc: "csv string of columns from annotation to port into the input vcf", default: "INFO/ALLELEID,INFO/CLNDN,INFO/CLNDNINCL,INFO/CLNDISDB,INFO/CLNDISDBINCL,INFO/CLNHGVS,INFO/CLNREVSTAT,INFO/CLNSIG,INFO/CLNSIGCONF,INFO/CLNSIGINCL,INFO/CLNVC,INFO/CLNVCSO,INFO/CLNVI"}
   annotation_vcf: {type: 'File?', secondaryFiles: ['.tbi'], doc: "additional bgzipped annotation vcf file"}
@@ -146,7 +149,7 @@ inputs:
 outputs:
   intervar_classification: {type: File, outputSource: run_intervar/intervar_classification}
   autopvs1_tsv: {type: File, outputSource: run_autopvs1/autopvs1_tsv}
-  annovar_vcfoutput: {type: 'File?', outputSource: run_intervar/annovar_vcfoutput}
+  annovar_vcfoutput: {type: 'File?', outputSource: [bcftools_strip_annovar/stripped_vcf, run_intervar/annovar_vcfoutput], pickValue: first_non_null}
   annovar_txt: {type: File, outputSource: run_intervar/annovar_txt}
   vep_with_clinvar: {type: 'File?', outputSource: bcftools_annotate/bcftools_annotated_vcf}
 steps:
@@ -188,7 +191,16 @@ steps:
       strip_info: bcftools_strip_for_vep
       tool_name:
         valueFrom: "vep"
-
+    out: [stripped_vcf]
+  bcftools_strip_annovar:
+    when: $(inputs.strip_info != null)
+    run: ../kf-annotation-tools/tools/bcftools_strip_ann.cwl
+    in:
+      input_vcf: vep_vcf
+      output_basename: output_basename
+      strip_info: bcftools_strip_for_annovar
+      tool_name:
+        valueFrom: "annovar"
     out: [stripped_vcf]
   bcftools_annotate:
     when: $(inputs.annotation_vcf != null)

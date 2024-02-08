@@ -95,6 +95,7 @@ As mentioned above, the preprocessing workflow can add an additional annotation
  - `annotation_vcf`: hg38 chromosome-formatted vcf file with multi-allelics split. If provided bcftools will add annotation from the specified columns for each variant that matches
  - `bcftools_annot_columns`: A csv string of from annotation to port into the input vcf. Must provide if `annotation_vcf` given. See [bcftools annotate](https://samtools.github.io/bcftools/bcftools.html#annotate) documentation on how to properly reference
  - `bcftools_strip_for_vep`: If re-annotating certain `INFO` fields, it's best to strip the old annotation first to avoid conflicts. Use the same format as `bcftools_annot_columns` to reference fields being stripped
+ - `bcftools_strip_for_annovar`: More of a convenience to strip the ANNOVAR VCF of annotations that maybe have been used initially in the workflow, but will likely not be used downstream 
  #### A note on ClinVar annotation
  For the publication, [ClinVar release 20231028](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/archive_2.0/2023/clinvar_20231028.vcf.gz) was used. In order to be compatible with our hg38-aligned vcfs, we additionally downloaded the [variant suammry](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz) file, ran a [custom script](scripts/cleanup_clinvar.py) that:
   - Converted contigs to `chr` format
