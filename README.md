@@ -6,7 +6,7 @@ git submodule init
 git submodule update
 ```
 ## Prequisite
-It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-annotation-tools/blob/v1.1.0/docs/GERMLINE_SNV_ANNOT_README.md) first.
+It is recommended to have first run the [Kids First Germline Annotation Workflow](https://github.com/kids-first/kf-annotation-tools/blob/v1.1.0/docs/GERMLINE_SNV_ANNOT_README.md).
 
 ## Pathogenicity Preprocessing Workflow
 This workflow uses the prerequisite input to run the InterVar workflow and autoPVS1 tool.
@@ -15,7 +15,7 @@ The major pieces of software being used are:
  - InterVar v2.2.1
  - AutoPVS1 v2.0.0: Modified from AutoPVS1 v2.0 to fit annotated KF vcf output. See [README for autoPVS1](https://github.com/d3b-center/D3b-autoPVS1/tree/v2.0.0#readme) for details
 
-Optionally, if you which to add (and in needed, overwrite) another annotation from a vcf file (likely ClinVar), a bcftools strip and annotate steps are provided. The input vcf will be processed and its result will appear as an additional output in the workflow. 
+Optionally, if you wish to add and, if needed, overwrite another annotation from a VCF file (likely ClinVar), a BCFtools strip and annotate steps are provided. The input VCF will be processed, and its result will appear as an additional output in the workflow. 
 ### Recommended inputs:
  - `annovar_db`: ANNOVAR Database with at minimum required resources to InterVar. Need to use [ANNOVAR download commands](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) to get the following:
      ```
@@ -92,12 +92,12 @@ Documentation for this can be found [here](https://github.com/d3b-center/D3b-aut
 
 ### Optional Inputs
 As mentioned above, the preprocessing workflow can add an additional annotation
- - `annotation_vcf`: hg38 chromosome-formatted vcf file with multi-allelics split. If provided bcftools will add annotation from the specified columns for each variant that matches
- - `bcftools_annot_columns`: A csv string of from annotation to port into the input vcf. Must provide if `annotation_vcf` given. See [bcftools annotate](https://samtools.github.io/bcftools/bcftools.html#annotate) documentation on how to properly reference
+ - `annotation_vcf`: hg38 chromosome-formatted VCF file with multi-allelics split. If provided BCFtools will add annotation from the specified columns for each variant that matches
+ - `bcftools_annot_columns`: A CSV string of from annotation to port into the input vcf. Must provide if `annotation_vcf` given. See [BCFtools annotate](https://samtools.github.io/bcftools/bcftools.html#annotate) documentation on how to properly reference
  - `bcftools_strip_for_vep`: If re-annotating certain `INFO` fields, it's best to strip the old annotation first to avoid conflicts. Use the same format as `bcftools_annot_columns` to reference fields being stripped
  - `bcftools_strip_for_annovar`: More of a convenience to strip the ANNOVAR VCF of annotations that maybe have been used initially in the workflow, but will likely not be used downstream 
  #### A note on ClinVar annotation
- For the publication, [ClinVar release 20231028](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/archive_2.0/2023/clinvar_20231028.vcf.gz) was used. In order to be compatible with our hg38-aligned vcfs, we additionally downloaded the [variant suammry](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz) file, ran a [custom script](scripts/cleanup_clinvar.py) that:
+ For the publication, [ClinVar release 20231028](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/archive_2.0/2023/clinvar_20231028.vcf.gz) was used. In order to be compatible with our hg38-aligned VCFs, we additionally downloaded the [variant summary](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz) file, ran a [custom script](scripts/cleanup_clinvar.py) that:
   - Converted contigs to `chr` format
   - Dropped contigs not in hg38
   - Use the variant summary table to replace `N` alleles and split into canonical `ACGT` alleles as those `N` were actually representing extended IUPAC nucleotides
