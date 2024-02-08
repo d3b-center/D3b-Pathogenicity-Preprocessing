@@ -117,7 +117,7 @@ inputs:
   bcftools_strip_for_intervar: {type: 'string?', doc: "csv string of columns to strip if needed\
       \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
   bcftools_strip_for_vep: {type: 'string?', doc: "csv string of columns to strip if needed\
-      \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ", default: "^INFO/DP"}
+      \ to avoid conflict/improve performance of a tool, i.e INFO/CSQ"}
   # bcftools annotate if more to do
   bcftools_annot_columns: {type: 'string?', doc: "csv string of columns from annotation to port into the input vcf", default: "INFO/ALLELEID,INFO/CLNDN,INFO/CLNDNINCL,INFO/CLNDISDB,INFO/CLNDISDBINCL,INFO/CLNHGVS,INFO/CLNREVSTAT,INFO/CLNSIG,INFO/CLNSIGCONF,INFO/CLNSIGINCL,INFO/CLNVC,INFO/CLNVCSO,INFO/CLNVI"}
   annotation_vcf: {type: 'File?', secondaryFiles: ['.tbi'], doc: "additional bgzipped annotation vcf file"}
@@ -197,7 +197,7 @@ hints:
 - class: sbg:maxNumberOfParallelInstances
   value: 2
 "sbg:links":
-- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.0.2'
+- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.1.0'
   label: github-release
 sbg:license: Apache License 2.0
 sbg:publisher: KFDRC
