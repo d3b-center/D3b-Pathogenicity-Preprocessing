@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 A script to create a suitable ClinVar reference vcf that:
  - Removes contigs that are not in your fasta
@@ -18,9 +19,9 @@ def split_records(record, nt_list, out):
         out.write(record)
 
 
-def update_contig_header(contig_list, header):
-    for contig in contig_list:
-        header.contigs.add(contig)
+def update_contig_header(contig_dict, header):
+    for contig in contig_dict:
+        header.contigs.add(contig_dict[contig])
 
 
 def create_mod_vcf(output_path, input_path, threads, update_dict, non_canon_dict, var_sum_path, update_path):
@@ -35,11 +36,10 @@ def create_mod_vcf(output_path, input_path, threads, update_dict, non_canon_dict
     rename = ""
     for record in input_vcf.fetch():
         try:
-            if record.contig in update_dict['old_contigs']:
+            if record.contig in update_dict['renamed_contigs']:
                 if record.contig != cur:
                     cur = record.contig
-                    if cur in update_dict['old_contigs']:
-                        rename = update_dict['renamed_contigs'][update_dict['old_contigs'].index(cur)]
+                    rename = update_dict['renamed_contigs'][record.contig]
                 record.contig = rename
                 # Use variant id in non-canon dict to update alts
                 if record.id in non_canon_dict:

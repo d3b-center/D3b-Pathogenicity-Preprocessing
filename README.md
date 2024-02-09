@@ -92,7 +92,7 @@ Documentation for this can be found [here](https://github.com/d3b-center/D3b-aut
 
 ### Optional Inputs
 As mentioned above, the preprocessing workflow can add an additional annotation
- - `annotation_vcf`: hg38 chromosome-formatted VCF file with multi-allelics split. If provided BCFtools will add annotation from the specified columns for each variant that matches
+ - `annotation_vcf`: hg38 chromosome-formatted VCF. If provided BCFtools will add annotation from the specified columns for each variant that matches
  - `bcftools_annot_columns`: A CSV string of from annotation to port into the input vcf. Must provide if `annotation_vcf` given. See [BCFtools annotate](https://samtools.github.io/bcftools/bcftools.html#annotate) documentation on how to properly reference
  - `bcftools_strip_for_vep`: If re-annotating certain `INFO` fields, it's best to strip the old annotation first to avoid conflicts. Use the same format as `bcftools_annot_columns` to reference fields being stripped
  - `bcftools_strip_for_annovar`: More of a convenience to strip the ANNOVAR VCF of annotations that maybe have been used initially in the workflow, but will likely not be used downstream 
