@@ -24,7 +24,7 @@ inputs:
   concept_ids: { type: 'File?', doc: "File containing list of conceptIDs to prioritize submissions for clinvar variant conflict resolution." }
   conflict_res: {  type: ['null', { type: enum, symbols: ["latest", "most_severe"], name: "conflict_resolution" }], doc: "how to resolve conflicts associated with conceptIDs." }
 outputs:
-  abridged: { type: 'File', outputSource: filter_annotations/abridged_output } 
+  abridged: { type: 'File', outputSource: filter_annotations/abridged_output }
   full: { type: 'File', outputSource: filter_annotations/full_output }
 steps:
   select_clinvar_subs:
@@ -58,7 +58,7 @@ steps:
       autopvs1_file: filter_vcf/filtered_autopsv
       intervar_file: filter_vcf/filtered_intervar
       variant_summary:
-        source: [submission_summary_file, select_clinvar_subs/clinvar_submissions]
+        source: [selected_clinvar_submissions, select_clinvar_subs/clinvar_submissions]
         pickValue: first_non_null
       output_basename: output_basename
     out: [annotation_report]
@@ -73,7 +73,7 @@ steps:
       autopvs1_file: filter_vcf/filtered_autopsv
       intervar_file: filter_vcf/filtered_intervar
       variant_summary:
-        source: [submission_summary_file, select_clinvar_subs/clinvar_submissions]
+        source: [selected_clinvar_submissions, select_clinvar_subs/clinvar_submissions]
         pickValue: first_non_null
       output_basename: output_basename
     out: [annotation_report]
@@ -81,7 +81,7 @@ steps:
     run: ../tools/autogvp_parse_vcf.cwl
     in:
       vcf_file: filter_vcf/filtered_vcf
-    out: [parsed_tsv]
+    out: [parsed_tsv, csq_subfields_tsv]
   filter_annotations:
     run: ../tools/autogvp_filter_annotations.cwl
     in:
@@ -90,6 +90,7 @@ steps:
         source: [annotate_cavatica/annotation_report, annotate_custom/annotation_report]
         pickValue: the_only_non_null
       colnames_file: output_colnames
+      csq_subfields: parse_vcf/csq_subfields_tsv
       output_basename: output_basename
     out: [abridged_output, full_output]
 
