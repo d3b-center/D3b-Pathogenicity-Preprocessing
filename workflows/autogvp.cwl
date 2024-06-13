@@ -100,7 +100,7 @@ hints:
 - class: sbg:maxNumberOfParallelInstances
   value: 2
 "sbg:links":
-- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.1.0'
+- id: 'https://github.com/d3b-center/D3b-Pathogenicity-Preprocessing/releases/tag/v1.2.0'
   label: github-release
 sbg:license: Apache License 2.0
 sbg:publisher: KFDRC
