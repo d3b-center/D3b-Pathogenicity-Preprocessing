@@ -86,6 +86,8 @@ inputs:
       conflicts associated with conceptIDs: latest or most_severe"}
   annotate_cpu: { type: 'int?', default: 1, doc: "CPUs to allocate to AutoGVP annotation" }
   annotate_ram: { type: 'int?', default: 2, doc: "GB of RAM to allocate to AutoGVP annotation" }
+  filter_annot_cpu: { type: 'int?', default: 1, doc: "CPUs to allocate to AutoGVP filter annotations" }
+  filter_annot_ram: { type: 'int?', default: 2, doc: "GB of RAM to allocate to AutoGVP filter annotations" }
 outputs:
   abridged: {type: 'File', outputSource: filter_annotations/abridged_output, doc: "output file with minimal information needed to
       interpret variant pathogenicity"}
@@ -160,6 +162,8 @@ steps:
       colnames_file: output_colnames
       csq_subfields: parse_vcf/csq_subfields_tsv
       output_basename: output_basename
+      cpu: filter_annot_cpu
+      ram: filter_annot_ram
     out: [abridged_output, full_output]
 
 $namespaces:
