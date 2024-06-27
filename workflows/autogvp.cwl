@@ -84,6 +84,10 @@ inputs:
   concept_ids: {type: 'File?', doc: "File containing list of conceptIDs to prioritize submissions for ClinVar variant conflict resolution"}
   conflict_res: {type: ['null', {type: enum, symbols: ["latest", "most_severe"], name: "conflict_resolution"}], doc: "How to resolve
       conflicts associated with conceptIDs: latest or most_severe"}
+  annotate_cpu: { type: 'int?', default: 1, doc: "CPUs to allocate to AutoGVP annotation" }
+  annotate_ram: { type: 'int?', default: 2, doc: "GB of RAM to allocate to AutoGVP annotation" }
+  filter_annot_cpu: { type: 'int?', default: 1, doc: "CPUs to allocate to AutoGVP filter annotations" }
+  filter_annot_ram: { type: 'int?', default: 2, doc: "GB of RAM to allocate to AutoGVP filter annotations" }
 outputs:
   abridged: {type: 'File', outputSource: filter_annotations/abridged_output, doc: "output file with minimal information needed to
       interpret variant pathogenicity"}
@@ -123,6 +127,8 @@ steps:
         source: [selected_clinvar_submissions, select_clinvar_subs/clinvar_submissions]
         pickValue: first_non_null
       output_basename: output_basename
+      cpu: annotate_cpu
+      ram: annotate_ram
     out: [annotation_report]
   annotate_custom:
     run: ../tools/autogvp_annotate_custom.cwl
@@ -138,6 +144,8 @@ steps:
         source: [selected_clinvar_submissions, select_clinvar_subs/clinvar_submissions]
         pickValue: first_non_null
       output_basename: output_basename
+      cpu: annotate_cpu
+      ram: annotate_ram
     out: [annotation_report]
   parse_vcf:
     run: ../tools/autogvp_parse_vcf.cwl
@@ -154,6 +162,8 @@ steps:
       colnames_file: output_colnames
       csq_subfields: parse_vcf/csq_subfields_tsv
       output_basename: output_basename
+      cpu: filter_annot_cpu
+      ram: filter_annot_ram
     out: [abridged_output, full_output]
 
 $namespaces:
