@@ -24,7 +24,7 @@ arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      bash /rocker-build/03-parse_vcf.sh $(inputs.vcf_file.path)
+      bash /rocker-build/AutoGVP/scripts/03-parse_vcf.sh $(inputs.vcf_file.path)
 
 inputs:
   vcf_file: { type: 'File', doc: "VCF file to parse" }

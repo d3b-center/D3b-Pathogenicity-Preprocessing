@@ -25,7 +25,7 @@ arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      Rscript /rocker-build/04-filter_gene_annotations.R --outdir .
+      Rscript /rocker-build/AutoGVP/scripts/04-filter_gene_annotations.R --outdir .
 
 inputs:
   vcf_file: { type: 'File', inputBinding: { position: 2, prefix: "--vcf" }, doc: "Input filtered and parsed VEP VCF file" }

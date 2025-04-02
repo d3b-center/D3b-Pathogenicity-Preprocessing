@@ -17,7 +17,7 @@ arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      bash /rocker-build/01-filter_vcf.sh
+      bash /rocker-build/AutoGVP/scripts/01-filter_vcf.sh
   - position: 8
     shellQuote: false
     valueFrom: "."

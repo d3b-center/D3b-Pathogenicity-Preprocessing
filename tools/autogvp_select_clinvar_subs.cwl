@@ -17,7 +17,7 @@ arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      Rscript /rocker-build/select-clinVar-submissions.R --outdir .
+      Rscript /rocker-build/AutoGVP/scripts/select-clinVar-submissions.R --outdir .
 
 inputs:
   variant_summary: { type: 'File', inputBinding: { prefix: "--variant_summary", position: 2 }, doc: "ClinVar variant summary file." }
