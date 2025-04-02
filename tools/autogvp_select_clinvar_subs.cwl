@@ -10,14 +10,14 @@ requirements:
     ramMin: $(inputs.ram * 1000)
     coresMin: $(inputs.cpu)
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.1'
+    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.3'
 
 baseCommand: []
 arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      Rscript /rocker-build/select-clinVar-submissions.R --outdir .
+      Rscript /rocker-build/AutoGVP/scripts/select-clinVar-submissions.R --outdir .
 
 inputs:
   variant_summary: { type: 'File', inputBinding: { prefix: "--variant_summary", position: 2 }, doc: "ClinVar variant summary file." }

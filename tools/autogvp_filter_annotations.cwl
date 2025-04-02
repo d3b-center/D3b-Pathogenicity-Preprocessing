@@ -15,7 +15,7 @@ requirements:
     ramMin: $(inputs.ram * 1000)
     coresMin: $(inputs.cpu)
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.1'
+    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.3'
   - class: InitialWorkDirRequirement
     listing:
       - $(inputs.csq_subfields)
@@ -25,7 +25,7 @@ arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      Rscript /rocker-build/04-filter_gene_annotations.R --outdir .
+      Rscript /rocker-build/AutoGVP/scripts/04-filter_gene_annotations.R --outdir .
 
 inputs:
   vcf_file: { type: 'File', inputBinding: { position: 2, prefix: "--vcf" }, doc: "Input filtered and parsed VEP VCF file" }

@@ -10,14 +10,14 @@ requirements:
     ramMin: $(inputs.ram * 1000)
     coresMin: $(inputs.cpu)
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.1'
+    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.3'
 
 baseCommand: []
 arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      Rscript /rocker-build/02-annotate_variants_custom_input.R --outdir .
+      Rscript /rocker-build/AutoGVP/scripts/02-annotate_variants_custom_input.R --outdir .
 
 inputs:
   vcf_file: { type: 'File', inputBinding: { position: 2, prefix: "--vcf" }, doc: "Input vcf file with VEP annotations" }

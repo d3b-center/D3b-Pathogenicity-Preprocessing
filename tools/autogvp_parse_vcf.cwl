@@ -10,7 +10,7 @@ requirements:
     ramMin: $(inputs.ram * 1000)
     coresMin: $(inputs.cpu)
   - class: DockerRequirement
-    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.1'
+    dockerPull: 'pgc-images.sbgenomics.com/diskin-lab/autogvp:v1.0.3'
   - class: InitialWorkDirRequirement
     listing:
       - $(inputs.vcf_file)
@@ -24,7 +24,7 @@ arguments:
   - position: 0
     shellQuote: false
     valueFrom: >-
-      bash /rocker-build/03-parse_vcf.sh $(inputs.vcf_file.path)
+      bash /rocker-build/AutoGVP/scripts/03-parse_vcf.sh $(inputs.vcf_file.path)
 
 inputs:
   vcf_file: { type: 'File', doc: "VCF file to parse" }
